@@ -1,0 +1,8 @@
+-
+  name: Deploy a python flask Web Application using mariadb
+  hosts: web
+  gather_facts: true
+  roles:
+    - python_enviornment
+    - mariadb
+    - web_flask
