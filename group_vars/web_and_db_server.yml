@@ -1,0 +1,4 @@
+    mysql_root_password: "root"
+    db_user: dip
+    db_user_pass: "1234"
+    db_name: employee_db
