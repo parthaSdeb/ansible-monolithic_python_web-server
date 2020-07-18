@@ -1,0 +1,11 @@
+---
+# tasks file for python_enviornment
+    - name: installing python and dependency
+      yum:
+        name: ['epel-release', 'python', 'python-devel']
+        state: present
+
+    - name: Installing pip for python
+      yum:
+        name: python-pip
+        state: present

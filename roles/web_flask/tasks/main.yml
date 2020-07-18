@@ -1,0 +1,14 @@
+---
+# tasks file for web_flask
+  - name: Installing flask and its dependencies
+    pip:
+      name: ['flask', 'flask-mysql']
+      state: present
+      
+  - name: Copy source code
+    copy:
+      src: app.py
+      dest: /opt/app.py
+
+  - name: Start web server
+    shell: FLASK_APP=/opt/app.py nohup flask run --host=0.0.0.0 &

@@ -1,0 +1,39 @@
+---
+# tasks file for mariadb
+    - name: installing mariadb...
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - "mariadb-server"
+        - "MySQL-python"
+      notify:
+        - restart_and_enable_mariadb
+
+    - name: Set root password for mariadb
+      mysql_user:
+        check_implicit_admin: true
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        user: root #setting the password fro the root incase it doesnt have a password
+        password: "{{ mysql_root_password }}"
+        # login_unix_socket: /var/lib/mysql/mysql.sock
+        host_all: yes
+
+    - name: Creating Application Database
+      mysql_db:
+        # login_unix_socket: /var/lib/mysql/mysql.sock
+        name: "{{ db_name }}"
+        login_host: "{{ ansible_fqdn }}"
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        state: present
+
+    - name: Create database user with name 'dip' with all database privileges
+      mysql_user:
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        name: "{{ db_user }}"
+        password: "{{ db_user_pass }}"
+        priv: '*.*:ALL'
+        state: present

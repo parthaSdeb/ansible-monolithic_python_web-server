@@ -1,0 +1,8 @@
+---
+# handlers file for mariadb
+
+- name: restart_and_enable_mariadb
+  service:
+    name: mariadb
+    state: restarted
+    enabled: true
