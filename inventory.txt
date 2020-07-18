@@ -1,0 +1,11 @@
+localhost ansible_host=192.168.10.5 ansible_connection=ssh ansible_ssh_pass=root
+
+[web]
+target1 ansible_host=192.168.10.6 ansible_connection=ssh ansible_ssh_pass=root
+
+[db]
+target2 ansible_host=192.168.10.7 ansible_connection=ssh ansible_ssh_pass=root
+
+[all_server:children]
+web
+db
